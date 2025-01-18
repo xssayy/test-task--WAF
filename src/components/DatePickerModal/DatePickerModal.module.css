@@ -1,0 +1,68 @@
+.modal {
+  position: absolute;
+  width: 800px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: visible;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+}
+
+.companyTitle {
+  margin-bottom: 5px;
+}
+
+.companyDescription {
+  margin-bottom: 15px;
+}
+
+.datePickerContainer {
+  margin-bottom: 15px;
+}
+
+.datePickerLabel {
+  display: inline-block;
+}
+
+.consultButton {
+  display: block;
+  background-color: #0066cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: background-color 0.125s ease-in-out;
+}
+
+.consultButton:hover {
+  background-color: #004d99;
+}
+
+.closeButton {
+  background: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 50%;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.125s ease-in-out;
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.closeButton:hover {
+  background-color: #0066cc;
+}
