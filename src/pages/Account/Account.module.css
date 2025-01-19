@@ -1,0 +1,32 @@
+.userDataList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.userDataListItem {
+  font-size: 18px;
+  color: #555;
+  padding: 10px 0;
+}
+
+.logoutButton {
+  display: block;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #f70404;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logoutButton:hover {
+  background-color: #831b1b;
+}
+
+.logoutButton:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}

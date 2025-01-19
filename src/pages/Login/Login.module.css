@@ -1,0 +1,85 @@
+/* Login.module.css */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f8ff; /* Светло-синий фон */
+  margin: 0;
+}
+
+.formContainer {
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.title {
+  margin-bottom: 24px;
+  font-size: 28px;
+  color: #003366; /* Темно-синий цвет текста */
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #003366;
+}
+
+.input {
+  padding: 12px;
+  border: 1px solid #b0c4de;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #4682b4; /* Голубой при фокусе */
+}
+
+.button {
+  background-color: #4682b4;
+  color: #ffffff;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #315f7e;
+}
+
+.redirectToRegistationPageText {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #003366;
+}
+
+.redirectToRegistationPageLink {
+  font-size: 14px;
+  color: #4682b4;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.redirectToRegistationPageLink:hover {
+  color: #315f7e;
+}

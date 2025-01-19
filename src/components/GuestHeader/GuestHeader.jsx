@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
-import styles from "./Header.module.css";
+import styles from "./GuestHeader.module.css";
 
-export default function Header() {
+function GuestHeader() {
   return (
     <header className={styles.header}>
       <nav>
@@ -19,34 +19,28 @@ export default function Header() {
           </li>
           <li>
             <NavLink
-              to="appointments"
+              to="login"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.activeLink]: isActive })
               }
             >
-              Мої зустрічі
+              Увійти
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="companies"
+              to="register"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.activeLink]: isActive })
               }
             >
-              Компанії
+              Зареєструватися
             </NavLink>
           </li>
         </ul>
       </nav>
-      <NavLink
-        to="account"
-        className={({ isActive }) =>
-          clsx(styles.profileButton, { [styles.activeButton]: isActive })
-        }
-      >
-        Мій профіль
-      </NavLink>
     </header>
   );
 }
+
+export default GuestHeader;

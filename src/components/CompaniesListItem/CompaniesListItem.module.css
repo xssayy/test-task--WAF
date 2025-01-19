@@ -1,0 +1,40 @@
+.companyItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.companyInfo {
+  max-width: 70%;
+}
+
+.companyName {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0 0 5px;
+}
+
+.companyDescription {
+  font-size: 1em;
+  color: #555;
+  margin: 0;
+}
+
+.consultButton {
+  background-color: #0066cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.125s ease;
+}
+
+.consultButton:hover {
+  background-color: #004d99;
+}

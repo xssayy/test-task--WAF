@@ -12,36 +12,30 @@
   padding: 20px;
 }
 
-.companyTitle {
+.title {
   margin-bottom: 5px;
 }
 
-.companyDescription {
+.description {
   margin-bottom: 15px;
 }
 
-.datePickerContainer {
-  margin-bottom: 15px;
-}
-
-.datePickerLabel {
-  display: inline-block;
-}
-
-.consultButton {
-  display: block;
-  background-color: #0066cc;
+.deleteButton {
+  background-color: #f70404;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  margin: 0 auto;
   cursor: pointer;
-  transition: background-color 0.125s ease-in-out;
+  transition: background-color 0.125s ease;
+  display: flex;
+  gap: 5px;
+  display: block;
+  margin: 0 auto;
 }
 
-.consultButton:hover {
-  background-color: #004d99;
+.deleteButton:hover {
+  background-color: #831b1b;
 }
 
 .closeButton {

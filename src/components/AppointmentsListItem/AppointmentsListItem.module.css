@@ -1,0 +1,56 @@
+.appointmentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.appointmentInfo {
+  max-width: 70%;
+}
+
+.appointmentName {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0 0 5px;
+}
+
+.appointmentDescription {
+  font-size: 1em;
+  color: #555;
+  margin: 0;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 15px;
+}
+
+.editButton {
+  background-color: #0066cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.125s ease;
+  display: flex;
+  gap: 5px;
+}
+
+.editButton:hover {
+  background-color: #004d99;
+}
+
+.deleteButton {
+  composes: editButton;
+  background-color: #f70404;
+}
+
+.deleteButton:hover {
+  background-color: #831b1b;
+}
