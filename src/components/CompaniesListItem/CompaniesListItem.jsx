@@ -23,7 +23,7 @@ function CompaniesListItem({ company }) {
         className={styles.consultButton}
         onClick={openModal}
       >
-        Записаться на консультацию
+        Записатися на консультацию
       </button>
       <ChooseAppointmentDateModal
         isOpen={modalIsOpen}

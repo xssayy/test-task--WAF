@@ -32,7 +32,12 @@ const AppointmentsListItem = ({ appointment }) => {
   return (
     <div className={styles.appointmentItem}>
       <div className={styles.appointmentInfo}>
-        <p className={styles.appointmentName}>{appointment.companyId}</p>
+        <p className={styles.appointmentName}>
+          {appointment.company.companyName}
+        </p>
+        <p className={styles.appointmentDescription}>
+          {appointment.company.companyDescription}
+        </p>
         <p className={styles.appointmentDescription}>
           {formatISOToCustom(appointment.appointmentTime)}
         </p>

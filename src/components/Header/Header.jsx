@@ -9,7 +9,7 @@ export default function Header() {
         <ul className={styles.navList}>
           <li>
             <NavLink
-              to="/"
+              to="/home"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.activeLink]: isActive })
               }

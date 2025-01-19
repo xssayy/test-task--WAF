@@ -18,19 +18,14 @@ const setupSession = (res, session) => {
 };
 
 export const registerUserController = async (req, res) => {
-  const response = await registerUser(req.body);
-
-  const session = response.session;
+  const session = await registerUser(req.body);
 
   setupSession(res, session);
 
   res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
-    data: {
-      user: response.user,
-      token: session.accessToken,
-    },
+    accessToken: session.accessToken,
   });
 };
 
@@ -45,12 +40,10 @@ export const loginUserController = async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now() + ONE_WEEK),
   });
-  res.json({
+  res.status(200).json({
     status: 200,
     message: 'Successfully logged in an user!',
-    data: {
-      accessToken: session.accessToken,
-    },
+    accessToken: session.accessToken,
   });
 };
 
@@ -73,11 +66,9 @@ export const refreshUserSessionController = async (req, res) => {
 
   setupSession(res, session);
 
-  res.json({
+  res.status(200).json({
     status: 200,
     message: 'Successfully refreshed a session!',
-    data: {
-      accessToken: session.accessToken,
-    },
+    accessToken: session.accessToken,
   });
 };

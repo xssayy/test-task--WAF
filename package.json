@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
+    "axios": "^1.7.9",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "i": "^0.3.7",
     "normalize.css": "^8.0.1",
     "npm": "^10.9.2",
@@ -18,8 +21,11 @@
     "react-datepicker": "^7.6.0",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
+    "react-loader-spinner": "^6.1.6",
     "react-modal": "^3.16.3",
-    "react-router-dom": "^7.1.2"
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.1.2",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

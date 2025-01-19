@@ -1,27 +1,24 @@
+import { useDispatch, useSelector } from "react-redux";
 import AppointmentsList from "../../components/AppointmentsList/AppointmentsList";
+import { useEffect } from "react";
+import { getClientData } from "../../redux/client/operations";
+import { selectClientData } from "../../redux/client/selectors";
 
 const Appointments = () => {
-  const appointments = [
-    {
-      companyId: "Company А ID",
-      appointmentTime: "2025-01-10T13:00:20.034Z",
-      id: 1,
-    },
-    {
-      companyId: "Company B ID",
-      appointmentTime: "2025-03-18T07:30:14.034Z",
-      id: 2,
-    },
-    {
-      companyId: "Company C ID",
-      appointmentTime: "2025-01-06T10:05:18.034Z",
-      id: 3,
-    },
-  ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getClientData());
+  }, [dispatch]);
+  const clientData = useSelector(selectClientData);
+
   return (
     <>
       <h2>Ваші зустрічі</h2>
-      <AppointmentsList appointments={appointments} />
+      {clientData?.appointments?.length > 0 ? (
+        <AppointmentsList appointments={clientData?.appointments} />
+      ) : (
+        <div>У вас ще не має зустрічей.</div>
+      )}
     </>
   );
 };

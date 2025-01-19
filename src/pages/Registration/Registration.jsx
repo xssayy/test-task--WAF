@@ -1,12 +1,35 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Registration.module.css";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations";
 
 const Registration = () => {
+  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formElements = e.target.elements;
+
+    const payload = {
+      firstName: formElements.firstName.value,
+      lastName: formElements.lastName.value,
+      email: formElements.email.value,
+      password: formElements.password.value,
+      role: "client",
+    };
+
+    dispatch(register(payload));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <h1 className={styles.title}>Реєстрація</h1>
-        <form className={styles.form}>
+        <form
+          className={styles.form}
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
           <label className={styles.label} htmlFor="firstName">
             Ім&apos;я
           </label>

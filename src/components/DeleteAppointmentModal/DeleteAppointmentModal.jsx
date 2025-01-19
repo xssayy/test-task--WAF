@@ -1,14 +1,15 @@
 import Modal from "react-modal";
 import styles from "./DeleteAppointmentModal.module.css";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
+import { useDispatch } from "react-redux";
+import { deleteClientAppointment } from "../../redux/client/operations";
 
 Modal.setAppElement("#root");
 
 const DeleteAppointmentModal = ({ isOpen, closeModal, appointment }) => {
+  const dispatch = useDispatch();
   const hadleDeleteAppointment = () => {
-    console.log("====================================");
-    console.log("delete appointment with id: ", appointment.id);
-    console.log("====================================");
+    dispatch(deleteClientAppointment(appointment._id));
   };
   return (
     <ModalWrapper isOpen={isOpen} closeModal={closeModal}>

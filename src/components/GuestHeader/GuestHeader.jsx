@@ -9,7 +9,7 @@ function GuestHeader() {
         <ul className={styles.navList}>
           <li>
             <NavLink
-              to="/"
+              to="/home"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.activeLink]: isActive })
               }
@@ -29,7 +29,7 @@ function GuestHeader() {
           </li>
           <li>
             <NavLink
-              to="register"
+              to="registration"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.activeLink]: isActive })
               }

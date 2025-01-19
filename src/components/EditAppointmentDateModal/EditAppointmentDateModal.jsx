@@ -3,6 +3,8 @@ import styles from "./EditAppointmentDateModal.module.css";
 import DatePickerComponent from "../DatePickerComponent/DatePickerComponent";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateClientData } from "../../redux/client/operations";
 
 Modal.setAppElement("#root");
 
@@ -10,14 +12,18 @@ const EditAppointmentDateModal = ({ isOpen, closeModal, appointment }) => {
   const [appointmentDate, setAppointmentDate] = useState(
     new Date(appointment.appointmentTime)
   );
+  const dispatch = useDispatch();
 
   const handleChangeAppointmentTime = () => {
-    const reqBody = {
-      userId: 32124123124123,
-      companyId: appointment.companyId,
-      time: appointmentDate.toISOString(),
+    const updatedAppointment = {
+      ...appointment,
+      appointmentTime: appointmentDate.toISOString(),
     };
-    console.log("Send request to change appointment time via body: ", reqBody);
+    console.log("====================================");
+    console.log(updatedAppointment);
+    console.log("====================================");
+    dispatch(updateClientData(updatedAppointment));
+    closeModal();
   };
 
   return (
@@ -36,9 +42,7 @@ const EditAppointmentDateModal = ({ isOpen, closeModal, appointment }) => {
       <button
         type="button"
         className={styles.acceptButton}
-        onClick={() => {
-          handleChangeAppointmentTime();
-        }}
+        onClick={handleChangeAppointmentTime}
       >
         Змінити час зустрічі
       </button>

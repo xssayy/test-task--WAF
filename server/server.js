@@ -14,9 +14,20 @@ const PORT = Number(getEnvVar('PORT', '3000'));
 
 export const startServer = () => {
   const app = express();
+  const allowedOrigins = ['http://localhost:5173', 'http://example.com'];
 
+  const corsOptions = {
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  };
   app.use(express.json());
-  app.use(cors());
+  app.use(cors(corsOptions));
   app.use(cookieParser());
 
   app.use(

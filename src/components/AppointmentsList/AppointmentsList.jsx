@@ -6,8 +6,8 @@ const AppointmentsList = ({ appointments }) => {
   return (
     <>
       <ul className={styles.appointmentList}>
-        {appointments.map((appointment, index) => (
-          <li key={index}>
+        {appointments.map((appointment) => (
+          <li key={appointment._id}>
             <AppointmentsListItem appointment={appointment} />
           </li>
         ))}

@@ -29,15 +29,10 @@ export const registerUser = async (payload) => {
   });
 
   const newSession = createSession();
-  const session = await SessionsCollection.create({
+  return await SessionsCollection.create({
     userId: newUser._id,
     ...newSession,
   });
-
-  return {
-    newUser,
-    session,
-  };
 };
 
 export const loginUser = async (payload) => {

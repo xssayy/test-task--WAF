@@ -8,19 +8,71 @@ import Account from "./pages/Account/Account";
 import Appointments from "./pages/Appointments/Appointments";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import Registration from "./pages/Registration/Registration";
+import RestrictedRoute from "./components/RestrictedRoute";
+import PrivateRoute from "./components/PrivateRoute";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
+import { useEffect } from "react";
+import { refreshUser } from "./redux/auth/operations";
+import RefreshLoader from "./components/RefreshLoader/RefreshLoader";
 
 function App() {
-  return (
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isRefreshering = useSelector(selectIsRefreshing);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+  return isRefreshering ? (
+    <RefreshLoader />
+  ) : (
     <>
-      <Header />
+      {isLoggedIn ? <Header /> : <GuestHeader />}
       <SharedLayout>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/companies" element={<Companies />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/account" element={<Account />} />
+          <Route
+            path="/registration"
+            element={
+              <RestrictedRoute
+                redirectTo="/home"
+                component={<Registration />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/home" component={<Login />} />
+            }
+          />
+          <Route
+            path="/companies"
+            element={
+              <PrivateRoute
+                redirectTo="/registration"
+                component={<Companies />}
+              />
+            }
+          />
+          <Route
+            path="/appointments"
+            element={
+              <PrivateRoute
+                redirectTo="/registration"
+                component={<Appointments />}
+              />
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <PrivateRoute
+                redirectTo="/registration"
+                component={<Account />}
+              />
+            }
+          />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </SharedLayout>
     </>
