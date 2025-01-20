@@ -14,7 +14,7 @@ const Login = () => {
       password: formElements.password.value,
     };
     await dispatch(logIn(payload));
-    dispatch(getCurrentUser());
+    await dispatch(getCurrentUser());
   };
   return (
     <div className={styles.container}>
