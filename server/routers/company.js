@@ -1,17 +1,34 @@
 import { Router } from 'express';
 import { authenticate } from '../middlewares/authenticate.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import {} from '../controllers/company.js';
+import {
+  createAppointmentController,
+  createCompanyDataController,
+  getAllCompaniesController,
+  getCompanyDataController,
+} from '../controllers/company.js';
 
 import { validateBody } from '../middlewares/validateBody.js';
-import { createCompany } from '../validation/company.js';
+import { appointmentSchema, createCompany } from '../validation/company.js';
 
-const clientRouter = Router();
+const companiesRouter = Router();
 
-clientRouter.use(authenticate);
+companiesRouter.use(authenticate);
 
-clientRouter.get('/', ctrlWrapper());
+companiesRouter.get('/', ctrlWrapper(getCompanyDataController));
 
-clientRouter.post('/create', validateBody(createCompany), ctrlWrapper());
+companiesRouter.get('/all-companies', ctrlWrapper(getAllCompaniesController));
 
-export default clientRouter;
+companiesRouter.post(
+  '/init',
+  validateBody(createCompany),
+  ctrlWrapper(createCompanyDataController),
+);
+
+companiesRouter.post(
+  '/create/:companyId',
+  validateBody(appointmentSchema),
+  ctrlWrapper(createAppointmentController),
+);
+
+export default companiesRouter;

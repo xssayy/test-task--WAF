@@ -86,3 +86,10 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     ...newSession,
   });
 };
+
+export const getCurrentUser = async (sessionId) => {
+  const session = await SessionsCollection.findById(sessionId);
+  const user = await UsersCollection.findById(session.userId);
+
+  return user;
+};

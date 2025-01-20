@@ -15,8 +15,10 @@ function CompaniesListItem({ company }) {
   return (
     <div className={styles.companyItem}>
       <div className={styles.companyInfo}>
-        <p className={styles.companyName}>{company.name}</p>
-        <p className={styles.companyDescription}>{company.description}</p>
+        <p className={styles.companyName}>{company.companyName}</p>
+        <p className={styles.companyDescription}>
+          {company.companyDescription}
+        </p>
       </div>
       <button
         type="button"

@@ -20,11 +20,6 @@ export const createClientAppointment = async (payload) => {
     console.log('First appointment was created!');
     return clientData;
   } else {
-    if (oldData.appointments.some((a) => a._id === appointment._id)) {
-      throw new createHttpError(
-        'Client already had an appointment to this company. Operation Canceled. Use update rout',
-      );
-    }
     oldData.appointments.push(appointment);
     await oldData.save();
     console.log('New appointment was added!');

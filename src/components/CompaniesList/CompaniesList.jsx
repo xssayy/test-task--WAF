@@ -5,7 +5,7 @@ const CompaniesList = ({ companies }) => {
   return (
     <ul className={styles.companyList}>
       {companies.map((company) => (
-        <li key={company.id}>
+        <li key={company._id}>
           <CompaniesListItem company={company} />
         </li>
       ))}

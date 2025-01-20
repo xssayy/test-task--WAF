@@ -13,17 +13,13 @@ const clearAuthHeader = () => {
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
+    console.log("====================================");
+    console.log("dispatch");
+    console.log("====================================");
     try {
       const registerResp = await axios.post("/auth/register", credentials);
       setAuthHeader(registerResp.data.accessToken);
-      const loginCredentials = {
-        email: credentials.email,
-        password: credentials.password,
-      };
-      console.log("qweqrqweq");
-
-      const loginResp = await axios.post("/auth/login", loginCredentials);
-      return loginResp.data;
+      return registerResp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -68,6 +64,31 @@ export const refreshUser = createAsyncThunk(
       const newToken = res.data.accessToken;
       setAuthHeader(newToken);
       return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getCurrentUser = createAsyncThunk(
+  "auth/getCurrentUser",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+
+    const persistedToken = state.auth.accessToken;
+
+    if (!persistedToken) {
+      return thunkAPI.rejectWithValue("No token available");
+    }
+
+    try {
+      setAuthHeader(persistedToken);
+      const response = await axios.get(`auth/current`, {
+        headers: {
+          Authorization: `Bearer ${persistedToken}`,
+        },
+      });
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

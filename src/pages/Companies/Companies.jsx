@@ -1,28 +1,23 @@
 import CompaniesList from "../../components/CompaniesList/CompaniesList";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { selectAllCompanies } from "../../redux/company/selectors";
+import { getAllCompanies } from "../../redux/company/operations";
 
 const Companies = () => {
-  const companies = [
-    {
-      name: "Компания А",
-      description: "Описание компании А",
-      id: 3314789127837813,
-    },
-    {
-      name: "Компания B",
-      description: "Описание компании B",
-      id: 331124531231,
-    },
-    {
-      name: "Компания C",
-      description: "Описание компании C",
-      id: 49781273917183,
-    },
-  ];
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllCompanies());
+  }, [dispatch]);
+  const companies = useSelector(selectAllCompanies) || [];
   return (
     <>
       <h2>Наші компанії</h2>
-      <CompaniesList companies={companies} />
+      {companies.length > 0 ? (
+        <CompaniesList companies={companies} />
+      ) : (
+        <div>На жаль, список компаній порожній</div>
+      )}
     </>
   );
 };

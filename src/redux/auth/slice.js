@@ -1,24 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, logIn, logOut, refreshUser } from "./operations";
+import {
+  register,
+  logIn,
+  logOut,
+  refreshUser,
+  getCurrentUser,
+} from "./operations";
 
 const handlePending = (state) => {
   state.loading = true;
-  state.error = null;
+  state.error = false;
 };
 
-const handleRejected = (state, action) => {
+const handleRejected = (state) => {
   state.loading = false;
-  state.error = action.payload;
+  state.error = true;
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
+    user: {},
     accessToken: null,
     isLoggedIn: false,
     isRefreshing: false,
     loading: false,
-    error: null,
+    error: false,
   },
   extraReducers: (builder) => {
     builder
@@ -27,24 +34,24 @@ export const authSlice = createSlice({
         state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
         state.loading = false;
-        state.error = null;
+        state.error = false;
       })
       .addCase(register.rejected, handleRejected)
       .addCase(logIn.pending, handlePending)
       .addCase(logIn.fulfilled, (state, action) => {
-        console.log("log");
         state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
         state.loading = false;
-        state.error = null;
+        state.error = false;
       })
       .addCase(logIn.rejected, handleRejected)
       .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, (state) => {
         state.loading = false;
-        state.error = null;
+        state.error = false;
         state.accessToken = null;
         state.isLoggedIn = false;
+        state.user = {};
       })
       .addCase(logOut.rejected, (state, action) => {
         state.loading = false;
@@ -60,7 +67,12 @@ export const authSlice = createSlice({
       })
       .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;
-      });
+      })
+      .addCase(getCurrentUser.pending, handlePending)
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+      })
+      .addCase(getCurrentUser.rejected, handleRejected);
   },
 });
 

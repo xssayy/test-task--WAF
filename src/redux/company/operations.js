@@ -2,15 +2,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:3000";
 
-export const getClientData = createAsyncThunk(
-  "client/getData",
+export const getCompanyData = createAsyncThunk(
+  "companies/getCompanyData",
   async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
 
       const persistedToken = state.auth.accessToken;
 
-      const response = await axios.get(`client`, null, {
+      const response = await axios.get(`companies`, null, {
         Authorization: `Bearer ${persistedToken}`,
       });
 
@@ -21,14 +21,15 @@ export const getClientData = createAsyncThunk(
   }
 );
 
-export const bookAppointment = createAsyncThunk(
-  "client/create",
-  async (appointment, thunkAPI) => {
+export const getAllCompanies = createAsyncThunk(
+  "companies/getAllCompanies",
+  async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
 
       const persistedToken = state.auth.accessToken;
-      const response = await axios.post(`client/create`, appointment, {
+
+      const response = await axios.get(`companies/all-companies`, {
         Authorization: `Bearer ${persistedToken}`,
       });
 
@@ -39,15 +40,15 @@ export const bookAppointment = createAsyncThunk(
   }
 );
 
-export const updateClientData = createAsyncThunk(
-  "client/update",
-  async (appointment, thunkAPI) => {
+export const createCompany = createAsyncThunk(
+  "companies/init",
+  async (companyData, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
 
       const persistedToken = state.auth.accessToken;
 
-      const response = await axios.patch(`client/update`, appointment, {
+      const response = await axios.post(`companies/init`, companyData, {
         Authorization: `Bearer ${persistedToken}`,
       });
 
@@ -58,24 +59,29 @@ export const updateClientData = createAsyncThunk(
   }
 );
 
-export const deleteClientAppointment = createAsyncThunk(
-  "client/delete",
-  async (appointment, thunkAPI) => {
+export const bookAppointmentToCompanyAcc = createAsyncThunk(
+  "companies/create",
+  async (payload, thunkAPI) => {
+    console.log("Payload:", payload);
+    console.log("CompanyId:", payload?.companyId);
+    console.log("AppointmentBody:", payload?.appointmentBody);
     try {
       const state = thunkAPI.getState();
-
       const persistedToken = state.auth.accessToken;
 
-      const response = await axios.delete(
-        `client/${appointment}`,
-        appointment,
+      const { companyId, appointmentBody } = payload;
+
+      const response = await axios.post(
+        `companies/create/${companyId}`,
+        appointmentBody,
         {
           Authorization: `Bearer ${persistedToken}`,
         }
       );
-
       return response.data;
     } catch (error) {
+      console.log(error);
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }

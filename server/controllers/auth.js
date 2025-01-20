@@ -1,5 +1,6 @@
 import { ONE_WEEK } from '../constants/index.js';
 import {
+  getCurrentUser,
   loginUser,
   logoutUser,
   refreshUsersSession,
@@ -70,5 +71,14 @@ export const refreshUserSessionController = async (req, res) => {
     status: 200,
     message: 'Successfully refreshed a session!',
     accessToken: session.accessToken,
+  });
+};
+
+export const getCurrentUserController = async (req, res) => {
+  const user = await getCurrentUser(req.cookies.sessionId);
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully finded a current user!',
+    user,
   });
 };

@@ -13,20 +13,30 @@ import PrivateRoute from "./components/PrivateRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
 import { useEffect } from "react";
-import { refreshUser } from "./redux/auth/operations";
+import { getCurrentUser, refreshUser } from "./redux/auth/operations";
 import RefreshLoader from "./components/RefreshLoader/RefreshLoader";
+import DefaultLoader from "./components/DefaultLoader/DefaultLoader";
+import { selectCompanyLoadingStatus } from "./redux/company/selectors";
+import { selectClientLoadingStatus } from "./redux/client/selectors";
 
 function App() {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isRefreshering = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(refreshUser());
+    dispatch(getCurrentUser());
   }, [dispatch]);
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isRefreshering = useSelector(selectIsRefreshing);
+  const companyLoadingStatus = useSelector(selectCompanyLoadingStatus);
+  const clientLoadingStatus = useSelector(selectClientLoadingStatus);
+  const isDataLoading = companyLoadingStatus || clientLoadingStatus;
+
   return isRefreshering ? (
     <RefreshLoader />
   ) : (
     <>
+      {isDataLoading && <DefaultLoader />}
       {isLoggedIn ? <Header /> : <GuestHeader />}
       <SharedLayout>
         <Routes>

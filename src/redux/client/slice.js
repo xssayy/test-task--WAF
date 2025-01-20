@@ -43,8 +43,6 @@ const clientsSlice = createSlice({
       .addCase(updateClientData.rejected, handleRejected)
       .addCase(deleteClientAppointment.pending, handlePending)
       .addCase(deleteClientAppointment.fulfilled, (state, action) => {
-        console.log("into slice: ", action.payload.data);
-
         state.clientData = action.payload.data;
         state.loading = false;
         state.error = null;

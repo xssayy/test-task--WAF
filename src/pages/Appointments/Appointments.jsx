@@ -1,23 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AppointmentsList from "../../components/AppointmentsList/AppointmentsList";
-import { useEffect } from "react";
-import { getClientData } from "../../redux/client/operations";
-import { selectClientData } from "../../redux/client/selectors";
+import CompanyAppointmentsList from "../../components/CompanyAppointmentsList/CompanyAppointmentsList";
+
+import { selectUser } from "../../redux/auth/selectors";
 
 const Appointments = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getClientData());
-  }, [dispatch]);
-  const clientData = useSelector(selectClientData);
+  const user = useSelector(selectUser);
 
   return (
     <>
       <h2>Ваші зустрічі</h2>
-      {clientData?.appointments?.length > 0 ? (
-        <AppointmentsList appointments={clientData?.appointments} />
+      {user.role === "client" ? (
+        <AppointmentsList />
       ) : (
-        <div>У вас ще не має зустрічей.</div>
+        <CompanyAppointmentsList />
       )}
     </>
   );

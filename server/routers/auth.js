@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import {
+  getCurrentUserController,
   loginUserController,
   logoutUserController,
   refreshUserSessionController,
@@ -24,5 +25,6 @@ authRouter.post(
 );
 authRouter.post('/logout', ctrlWrapper(logoutUserController));
 authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));
+authRouter.get('/current', ctrlWrapper(getCurrentUserController));
 
 export default authRouter;

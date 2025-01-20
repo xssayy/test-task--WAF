@@ -9,6 +9,7 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import authRouter from './routers/auth.js';
 import getEnvVar from './utils/getEnvVar.js';
 import clientRouter from './routers/client.js';
+import companiesRouter from './routers/company.js';
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -41,6 +42,8 @@ export const startServer = () => {
   app.use('/auth', authRouter);
 
   app.use('/client', clientRouter);
+
+  app.use('/companies', companiesRouter);
 
   app.use('*', (req, res) => {
     res.status(404).json({

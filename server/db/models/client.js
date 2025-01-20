@@ -1,5 +1,10 @@
 import { model, Schema } from 'mongoose';
-import { companySchema } from './company.js';
+
+const companySchema = new Schema({
+  companyOwnerId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
+  companyName: { type: String, required: true },
+  companyDescription: { type: String, required: true },
+});
 
 const appointmentSchema = new Schema({
   appointmentTime: {
@@ -12,7 +17,7 @@ const appointmentSchema = new Schema({
 const clientsSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
-    appointments: [{ type: appointmentSchema, default: [], required: true }],
+    appointments: [{ type: appointmentSchema, default: [], required: false }],
   },
   {
     timestamps: true,

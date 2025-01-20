@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Login.module.css";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/operations";
+import { getCurrentUser, logIn } from "../../redux/auth/operations";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formElements = e.target.elements;
 
@@ -13,7 +13,8 @@ const Login = () => {
       email: formElements.email.value,
       password: formElements.password.value,
     };
-    dispatch(logIn(payload));
+    await dispatch(logIn(payload));
+    dispatch(getCurrentUser());
   };
   return (
     <div className={styles.container}>
