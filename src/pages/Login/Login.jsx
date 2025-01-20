@@ -13,8 +13,8 @@ const Login = () => {
       email: formElements.email.value,
       password: formElements.password.value,
     };
-    await dispatch(logIn(payload));
-    await dispatch(getCurrentUser());
+    dispatch(logIn(payload));
+    dispatch(getCurrentUser());
   };
   return (
     <div className={styles.container}>
