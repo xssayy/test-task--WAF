@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://test-task-waf.onrender.com/";
 
 export const getCompanyData = createAsyncThunk(
   "companies/getCompanyData",
