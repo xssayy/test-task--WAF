@@ -13,7 +13,7 @@ const Login = () => {
       email: formElements.email.value,
       password: formElements.password.value,
     };
-    dispatch(logIn(payload));
+    await dispatch(logIn(payload));
     dispatch(getCurrentUser());
   };
   return (
