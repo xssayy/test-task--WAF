@@ -18,6 +18,7 @@ export const startServer = () => {
   const allowedOrigins = [
     'http://localhost:5173',
     'https://test-task-waf.onrender.com',
+    'https://test-task-waf.vercel.app/',
   ];
 
   const corsOptions = {
