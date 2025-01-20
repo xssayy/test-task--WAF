@@ -11,10 +11,14 @@ const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken.toString(), {
     httpOnly: true,
     expires: new Date(Date.now() + ONE_WEEK),
+    sameSite: 'None', // Позволяет отправку cookies в кросс-доменных запросах
+    secure: true, // Этот флаг необходим для использования sameSite='None'
   });
   res.cookie('sessionId', session._id.toString(), {
     httpOnly: true,
     expires: new Date(Date.now() + ONE_WEEK),
+    sameSite: 'None', // Позволяет отправку cookies в кросс-доменных запросах
+    secure: true, // Этот флаг необходим для использования sameSite='None'
   });
 };
 
