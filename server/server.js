@@ -15,7 +15,10 @@ const PORT = Number(getEnvVar('PORT', '3000'));
 
 export const startServer = () => {
   const app = express();
-  const allowedOrigins = ['http://localhost:5173', 'http://example.com'];
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'https://test-task-waf.onrender.com',
+  ];
 
   const corsOptions = {
     origin: (origin, callback) => {
